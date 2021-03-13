@@ -1,6 +1,6 @@
 
 ## Simple food api
-* Basic CRUD app  *
+> Basic CRUD api
 * download project
 * run 
 ``` php artisan key:generate ```
