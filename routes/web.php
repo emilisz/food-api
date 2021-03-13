@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
     $foods = Http::get('http://food-api.test/api/v1/foods')->json();
-    return view('welcome',compact('foods'));
+    return view('welcome', compact('foods'));
 });
 
 Route::get('recipes/{food}', function (Food $food) {
-    $food = Http::get('http://food-api.test/api/v1/foods/'.$food->id)[0];
+    $food = Http::get('http://food-api.test/api/v1/foods/' . $food->id)[0];
     return view('show', compact('food'));
 })->name('show');
 
@@ -34,8 +34,13 @@ Route::get('/create', function () {
 });
 
 Route::get('/{id}/edit', function ($id) {
-    $food = Http::get('http://food-api.test/api/v1/foods/'.$id)[0];
+    $food = Http::get('http://food-api.test/api/v1/foods/' . $id)[0];
     $ingredients = Ingredient::all();
-    
-    return view('edit', compact('food','ingredients'));
-})->name('recipe-edit');
+
+    return view('edit', compact('food', 'ingredients'));
+})->name('recipe.edit');
+
+Route::delete('/{id}', function ($id) {
+    Food::find($id)->delete();
+    return redirect('/');
+})->name('recipe.delete');

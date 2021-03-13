@@ -28,8 +28,14 @@
                     </ul>
                 </div>
             </div>
-            <a class="float-right px-2 py-1 rounded bg-yellow-600  mt-5"
-                href="{{route('recipe-edit', $food['id'])}}">Edit</a>
+           <div class="flex flex-row gap-4 mt-5 float-right">
+               <a class=" px-2 py-1 rounded bg-yellow-600  " href="{{route('recipe.edit', $food['id'])}}">Edit</a>
+                <form action="{{route('recipe.delete', $food['id'])}}" method="post">
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="bg-red-800 text-white px-3 py-1 rounded">Delete</button>
+                </form>
+           </div>
         </div>
 
     </div>
